@@ -3,6 +3,10 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import styled from "styled-components";
 
+const Title = styled.h1`
+  padding: 10px;
+`;
+
 const CanvasContainer = styled.div`
   width: 100vw;
   height: 500px;
@@ -16,9 +20,6 @@ const CanvasContainer = styled.div`
   }
 `;
 
-const Title = styled.h1`
-  padding: 10px;
-`;
 const Aniamtion = (props) => {
   useFrame(({ clock }) => {
     props.thisBox.current.rotation.x =
@@ -31,13 +32,13 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const BoxSample = () => {
+const GeometryPartTwoTorusKnot = () => {
   const thisBox = useRef();
 
   return (
     <>
       <CanvasContainer>
-        <Title>Box sample</Title>
+        <Title>Geomeometry Part Two : TorusKnotGeometry</Title>
         <Canvas>
           <Suspense fallback={null}>
             <ambientLight />
@@ -46,10 +47,22 @@ const BoxSample = () => {
               color="#fffffff"
               intensity={3}
             />
-            <mesh ref={thisBox}>
-              <boxGeometry attach="geometry" args={[2.5, 2.5, 2.5]} />
-              <meshPhongMaterial attach="material" color="darkblue" />
-            </mesh>
+            <group ref={thisBox}>
+              <mesh>
+                <torusKnotGeometry
+                  attach="geometry"
+                  args={[1.3, 0.4, 128, 32, 3, 5]}
+                />
+                <meshPhongMaterial attach="material" color="#0x515151" />
+              </mesh>
+              <mesh>
+                <torusKnotGeometry
+                  attach="geometry"
+                  args={[1.3, 0.4, 128, 32, 3, 5]}
+                />
+                <meshNormalMaterial wireframe />
+              </mesh>
+            </group>
             <Aniamtion thisBox={thisBox} />
             <PerspectiveCamera
               manual
@@ -69,4 +82,4 @@ const BoxSample = () => {
   );
 };
 
-export default BoxSample;
+export default GeometryPartTwoTorusKnot;
