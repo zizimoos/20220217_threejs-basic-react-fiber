@@ -8,7 +8,7 @@ const Title = styled.h1`
 `;
 
 const CanvasContainer = styled.div`
-  width: 100vw;
+  width: 500px;
   height: 500px;
   display: flex;
   flex-direction: column;

@@ -19,10 +19,14 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
 `;
+const Title = styled.h1`
+  padding: 10px;
+`;
 
 const Home = () => {
   return (
     <Container>
+      <Title>ThreeJS reactJS</Title>
       <BoxSample />
       <GeometryPartOne />
       <GeometryPartTwo />

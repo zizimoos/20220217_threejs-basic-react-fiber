@@ -4,16 +4,13 @@ import { Suspense, useRef } from "react";
 import styled from "styled-components";
 
 const CanvasContainer = styled.div`
-  width: 100vw;
+  width: 500px;
   height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  @media (min-width: 768px) {
-    width: 50vw;
-  }
+  background-color: black;
 `;
 
 const Title = styled.h1`
@@ -51,16 +48,7 @@ const BoxSample = () => {
               <meshPhongMaterial attach="material" color="darkblue" />
             </mesh>
             <Aniamtion thisBox={thisBox} />
-            <PerspectiveCamera
-              manual
-              aspect={1200 / 600}
-              far={1000}
-              near={0.1}
-              fov={75}
-              position={[0, 100, 10]}
-              lookAt={[0, 0, 0]}
-              onUpdate={(c) => c.updateProjectionMatrix()}
-            />
+            <PerspectiveCamera />
             <OrbitControls />
           </Suspense>
         </Canvas>

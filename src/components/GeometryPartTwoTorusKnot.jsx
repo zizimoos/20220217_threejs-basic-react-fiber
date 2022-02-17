@@ -8,7 +8,7 @@ const Title = styled.h1`
 `;
 
 const CanvasContainer = styled.div`
-  width: 100vw;
+  width: 500px;
   height: 500px;
   display: flex;
   flex-direction: column;
@@ -66,7 +66,7 @@ const GeometryPartTwoTorusKnot = () => {
             <Aniamtion thisBox={thisBox} />
             <PerspectiveCamera
               manual
-              aspect={1200 / 600}
+              aspect={500 / 500}
               far={1000}
               near={0.1}
               fov={75}
