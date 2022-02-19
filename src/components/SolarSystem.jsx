@@ -96,10 +96,6 @@ const SolarSystem = () => {
             <sphereGeometry attach="geometry" args={[0.05, 16, 16]} />
             <meshPhongMaterial attach="material" color="honeydew" />
           </mesh>
-          <mesh>
-            <sphereGeometry attach="geometry" args={[0.1, 16, 16]} />
-            <meshNormalMaterial wireframe />
-          </mesh>
         </group>
         <MoonAniamtion MoonBox={MoonBox} />
       </>
