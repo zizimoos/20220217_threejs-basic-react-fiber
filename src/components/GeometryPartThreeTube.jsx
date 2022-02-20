@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Tube } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import styled from "styled-components";
@@ -21,18 +21,19 @@ const CanvasContainer = styled.div`
   // }
 `;
 
-const shape = new THREE.Shape();
-
-const x = -2.5;
-const y = -5;
-shape.moveTo(x + 2.5, y + 2.5);
-shape.bezierCurveTo(x + 2.5, y + 2.5, x + 2, y, x, y);
-shape.bezierCurveTo(x - 3, y, x - 3, y + 3.5, x - 3, y + 3.5);
-shape.bezierCurveTo(x - 3, y + 5.5, x - 1.5, y + 7.7, x + 2.5, y + 9.5);
-shape.bezierCurveTo(x + 6, y + 7.7, x + 8, y + 4.5, x + 8, y + 3.5);
-shape.bezierCurveTo(x + 8, y + 3.5, x + 8, y, x + 5, y);
-shape.bezierCurveTo(x + 3.5, y, x + 2.5, y + 2.5, x + 2.5, y + 2.5);
-shape.closePath();
+class CutomSinCurve extends THREE.Curve {
+  constructor(scale) {
+    super();
+    this.scale = scale;
+  }
+  getPoint(t) {
+    const tx = t * 3 - 1.5;
+    const ty = Math.sin(2 * Math.PI * t);
+    const tz = 0;
+    return new THREE.Vector3(tx, ty, tz).multiplyScalar(this.scale);
+  }
+}
+const path = new CutomSinCurve(1);
 
 const Aniamtion = (props) => {
   useFrame(({ clock }) => {
@@ -46,13 +47,13 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const GeometryPartThreeShapeSine = () => {
+const GeometryPartThreeTube = () => {
   const thisBox = useRef();
 
   return (
     <>
       <CanvasContainer>
-        <Title>Geomeometry Part Three : Sine</Title>
+        <Title>Geomeometry Part Three : Tube Geometry</Title>
         <Canvas camera={{ postion: [0, 0, 50] }}>
           <Suspense fallback={null}>
             <ambientLight />
@@ -62,15 +63,14 @@ const GeometryPartThreeShapeSine = () => {
               intensity={3}
             />
             <group ref={thisBox}>
-              <mesh></mesh>
-              {/* <mesh>
-                <shapeBufferGeometry attach="geometry" args={[shape]} />
-                <meshPhongMaterial attach="material" color="#0x515151" />
-              </mesh>
               <mesh>
-                <shapeBufferGeometry attach="geometry" args={[shape]} />
-                <meshNormalMaterial wireframe />
-              </mesh> */}
+                <Tube args={[path, 40, 0.3, 8, false]}>
+                  <meshPhongMaterial attach="material" color="#f3f3f3" />
+                </Tube>
+                <Tube args={[path, 40, 0.3, 8, false]}>
+                  <meshNormalMaterial wireframe />
+                </Tube>
+              </mesh>
             </group>
             <Aniamtion thisBox={thisBox} />
             <OrbitControls />
@@ -81,4 +81,4 @@ const GeometryPartThreeShapeSine = () => {
   );
 };
 
-export default GeometryPartThreeShapeSine;
+export default GeometryPartThreeTube;

@@ -1,7 +1,12 @@
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import * as THREE from "three";
+import { Lathe, OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import styled from "styled-components";
+
+const Title = styled.h1`
+  padding: 10px;
+`;
 
 const CanvasContainer = styled.div`
   width: 500px;
@@ -10,12 +15,21 @@ const CanvasContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: white;
+  // @media (min-width: 768px) {
+  //   width: 50vw;
+  // }
 `;
 
-const Title = styled.h1`
-  padding: 10px;
-`;
+const points = [];
+for (let i = 0; i < 10; i++) {
+  points.push(new THREE.Vector2(Math.sin(i * 0.2) * 3 + 3, (i - 5) * 0.8));
+  // const x = i * 0.1;
+  // const y = Math.sin(x);
+  // const z = Math.cos(x);
+  // points.push(new THREE.Vector3(x, y, z));
+}
+
 const Aniamtion = (props) => {
   useFrame(({ clock }) => {
     props.thisBox.current.rotation.x =
@@ -28,14 +42,14 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const BoxSample = () => {
+const GeometryPartThreeLathe = () => {
   const thisBox = useRef();
 
   return (
     <>
       <CanvasContainer>
-        <Title>Box sample</Title>
-        <Canvas>
+        <Title>Geomeometry Part Three : Lathe Geometry</Title>
+        <Canvas camera={{ postion: [0, 0, 10] }}>
           <Suspense fallback={null}>
             <ambientLight />
             <directionalLight
@@ -43,12 +57,17 @@ const BoxSample = () => {
               color="#fffffff"
               intensity={3}
             />
-            <mesh ref={thisBox}>
-              <boxGeometry attach="geometry" args={[2.5, 2.5, 2.5]} />
-              <meshPhongMaterial attach="material" color="chocolate" />
-            </mesh>
+            <group ref={thisBox}>
+              <mesh>
+                <Lathe args={[points]}>
+                  <meshPhongMaterial attach="material" color="#f3f3f3" />
+                </Lathe>
+                <Lathe args={[points]}>
+                  <meshNormalMaterial wireframe />
+                </Lathe>
+              </mesh>
+            </group>
             <Aniamtion thisBox={thisBox} />
-            <PerspectiveCamera />
             <OrbitControls />
           </Suspense>
         </Canvas>
@@ -57,4 +76,4 @@ const BoxSample = () => {
   );
 };
 
-export default BoxSample;
+export default GeometryPartThreeLathe;

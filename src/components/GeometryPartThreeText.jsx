@@ -1,7 +1,12 @@
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import React from "react";
+import { OrbitControls, Text } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import styled from "styled-components";
+
+const Title = styled.h1`
+  padding: 10px;
+`;
 
 const CanvasContainer = styled.div`
   width: 500px;
@@ -10,12 +15,12 @@ const CanvasContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: white;
+  // @media (min-width: 768px) {
+  //   width: 50vw;
+  // }
 `;
 
-const Title = styled.h1`
-  padding: 10px;
-`;
 const Aniamtion = (props) => {
   useFrame(({ clock }) => {
     props.thisBox.current.rotation.x =
@@ -28,14 +33,14 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const BoxSample = () => {
+const GeometryPartThreeText = () => {
   const thisBox = useRef();
 
   return (
     <>
       <CanvasContainer>
-        <Title>Box sample</Title>
-        <Canvas>
+        <Title>Geomeometry Part Three : TextGeometry</Title>
+        <Canvas camera={{ postion: [0, 0, 10] }}>
           <Suspense fallback={null}>
             <ambientLight />
             <directionalLight
@@ -43,12 +48,13 @@ const BoxSample = () => {
               color="#fffffff"
               intensity={3}
             />
-            <mesh ref={thisBox}>
-              <boxGeometry attach="geometry" args={[2.5, 2.5, 2.5]} />
-              <meshPhongMaterial attach="material" color="chocolate" />
-            </mesh>
+            <group ref={thisBox}>
+              <mesh>
+                <Text scale={[10, 10, 10]}>HELLO WORLD</Text>
+                <meshNormalMaterial wireframe />
+              </mesh>
+            </group>
             <Aniamtion thisBox={thisBox} />
-            <PerspectiveCamera />
             <OrbitControls />
           </Suspense>
         </Canvas>
@@ -57,4 +63,4 @@ const BoxSample = () => {
   );
 };
 
-export default BoxSample;
+export default GeometryPartThreeText;

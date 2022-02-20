@@ -1,5 +1,6 @@
+import React from "react";
 import * as THREE from "three";
-import { OrbitControls } from "@react-three/drei";
+import { Extrude, OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import styled from "styled-components";
@@ -46,14 +47,26 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const GeometryPartThreeShapeSine = () => {
+const GeometryPartThreeExtrude = () => {
   const thisBox = useRef();
+  const extrudeSettings = React.useMemo(
+    () => ({
+      steps: 2,
+      depth: 6,
+      bevelEnabled: true,
+      bevelThickness: 1,
+      bevelSize: 1,
+      bevelOffset: 0,
+      bevelSegments: 1,
+    }),
+    []
+  );
 
   return (
     <>
       <CanvasContainer>
-        <Title>Geomeometry Part Three : Sine</Title>
-        <Canvas camera={{ postion: [0, 0, 50] }}>
+        <Title>Geomeometry Part Three : ExtrudeGeometry</Title>
+        <Canvas camera={{ postion: [0, 0, 10] }}>
           <Suspense fallback={null}>
             <ambientLight />
             <directionalLight
@@ -62,15 +75,10 @@ const GeometryPartThreeShapeSine = () => {
               intensity={3}
             />
             <group ref={thisBox}>
-              <mesh></mesh>
-              {/* <mesh>
-                <shapeBufferGeometry attach="geometry" args={[shape]} />
-                <meshPhongMaterial attach="material" color="#0x515151" />
-              </mesh>
               <mesh>
-                <shapeBufferGeometry attach="geometry" args={[shape]} />
+                <Extrude args={[shape, extrudeSettings]} />
                 <meshNormalMaterial wireframe />
-              </mesh> */}
+              </mesh>
             </group>
             <Aniamtion thisBox={thisBox} />
             <OrbitControls />
@@ -81,4 +89,4 @@ const GeometryPartThreeShapeSine = () => {
   );
 };
 
-export default GeometryPartThreeShapeSine;
+export default GeometryPartThreeExtrude;
