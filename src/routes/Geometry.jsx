@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import BoxSample from "../components/BoxSample";
 import GeometryPartOne from "../components/GeometryPartOne";
+import GeometryPartThreeShape from "../components/GeometryPartThreeShape";
+import GeometryPartThreeShapeHeart from "../components/GeometryPartThreeShapeHeart";
+import GeometryPartThreeShapeSine from "../components/GeometryPartThreeShapeSine";
 import GeometryPartTwo from "../components/GeometryPartTwo";
 import GeometryPartTwoCorn from "../components/GeometryPartTwoCorn";
 import GeometryPartTwoCylinder from "../components/GeometryPartTwoCylinder";
@@ -37,6 +40,9 @@ const Geometry = () => {
       <GeometryPartTwoPlane />
       <GeometryPartTwoTorus />
       <GeometryPartTwoTorusKnot />
+      <GeometryPartThreeShape />
+      <GeometryPartThreeShapeHeart />
+      <GeometryPartThreeShapeSine />
     </Container>
   );
 };

@@ -15,9 +15,9 @@ const CanvasContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: white;
-  @media (min-width: 768px) {
-    width: 50vw;
-  }
+  // @media (min-width: 768px) {
+  //   width: 50vw;
+  // }
 `;
 
 const Aniamtion = (props) => {

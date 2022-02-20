@@ -1,4 +1,5 @@
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import * as THREE from "three";
+import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import styled from "styled-components";
@@ -20,6 +21,28 @@ const CanvasContainer = styled.div`
   // }
 `;
 
+const shape = new THREE.Shape();
+
+const x = -2.5;
+const y = -5;
+shape.moveTo(x + 2.5, y + 2.5);
+shape.bezierCurveTo(x + 2.5, y + 2.5, x + 2, y, x, y);
+shape.bezierCurveTo(x - 3, y, x - 3, y + 3.5, x - 3, y + 3.5);
+shape.bezierCurveTo(x - 3, y + 5.5, x - 1.5, y + 7.7, x + 2.5, y + 9.5);
+shape.bezierCurveTo(x + 6, y + 7.7, x + 8, y + 4.5, x + 8, y + 3.5);
+shape.bezierCurveTo(x + 8, y + 3.5, x + 8, y, x + 5, y);
+shape.bezierCurveTo(x + 3.5, y, x + 2.5, y + 2.5, x + 2.5, y + 2.5);
+shape.closePath();
+
+// 	const settings = {
+// 		steps: 4,
+// 		depth: 4,
+// 		bevelEnable: true,
+// 		bevelThickness: 0.5,
+// 		bevelSize: 0.3,
+// 		bevelSegments: 5,
+// 	};
+
 const Aniamtion = (props) => {
   useFrame(({ clock }) => {
     props.thisBox.current.rotation.x =
@@ -32,14 +55,14 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const GeometryPartTwoSphere = () => {
+const GeometryPartThreeShapeSine = () => {
   const thisBox = useRef();
 
   return (
     <>
       <CanvasContainer>
-        <Title>Geomeometry Part Two : sphereGeometry</Title>
-        <Canvas>
+        <Title>Geomeometry Part Three : Sine</Title>
+        <Canvas camera={{ postion: [0, 0, 10] }}>
           <Suspense fallback={null}>
             <ambientLight />
             <directionalLight
@@ -49,25 +72,15 @@ const GeometryPartTwoSphere = () => {
             />
             <group ref={thisBox}>
               <mesh>
-                <sphereGeometry attach="geometry" args={[2, 16, 16]} />
+                <shapeBufferGeometry attach="geometry" args={[shape]} />
                 <meshPhongMaterial attach="material" color="#0x515151" />
               </mesh>
               <mesh>
-                <sphereGeometry attach="geometry" args={[2, 16, 16]} />
+                <shapeBufferGeometry attach="geometry" args={[shape]} />
                 <meshNormalMaterial wireframe />
               </mesh>
             </group>
             <Aniamtion thisBox={thisBox} />
-            <PerspectiveCamera
-              manual
-              aspect={1200 / 600}
-              far={1000}
-              near={0.1}
-              fov={75}
-              position={[0, 100, 10]}
-              lookAt={[0, 0, 0]}
-              onUpdate={(c) => c.updateProjectionMatrix()}
-            />
             <OrbitControls />
           </Suspense>
         </Canvas>
@@ -76,4 +89,4 @@ const GeometryPartTwoSphere = () => {
   );
 };
 
-export default GeometryPartTwoSphere;
+export default GeometryPartThreeShapeSine;

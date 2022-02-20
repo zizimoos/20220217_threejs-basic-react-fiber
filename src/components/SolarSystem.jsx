@@ -1,4 +1,4 @@
-import { OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
+import { OrbitControls, Stars } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import styled from "styled-components";
@@ -16,9 +16,9 @@ const CanvasContainer = styled.div`
   align-items: center;
   color: white;
   background-color: black;
-  @media (min-width: 768px) {
-    width: 50vw;
-  }
+  // @media (min-width: 768px) {
+  //   width: 50vw;
+  // }
 `;
 
 const Aniamtion = (props) => {
