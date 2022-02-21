@@ -1,7 +1,15 @@
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, useHelper } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import styled from "styled-components";
+import { useLoader } from "@react-three/fiber";
+import { TextureLoader } from "three/src/loaders/TextureLoader";
+import texture from "../texture/uv_grid_opengl.jpg";
+import { BoxHelper } from "three";
+
+const Title = styled.h1`
+  padding: 10px;
+`;
 
 const CanvasContainer = styled.div`
   width: 500px;
@@ -10,12 +18,12 @@ const CanvasContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: white;
+  // @media (min-width: 768px) {
+  //   width: 50vw;
+  // }
 `;
 
-const Title = styled.h1`
-  padding: 10px;
-`;
 const Aniamtion = (props) => {
   useFrame(({ clock }) => {
     props.thisBox.current.rotation.x =
@@ -28,33 +36,39 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const SampleBox = () => {
+const CustomGeo = () => {
   const thisBox = useRef();
+
+  const colormap = useLoader(TextureLoader, texture);
+  useHelper(thisBox, BoxHelper, "cyan");
+
   return (
     <>
-      <mesh ref={thisBox}>
-        <boxGeometry attach="geometry" args={[2.5, 2.5, 2.5]} />
-        <meshNormalMaterial attach="material" />
-      </mesh>
-      <Aniamtion thisBox={thisBox} />
+      <group ref={thisBox}>
+        <mesh>
+          <boxGeometry attach="geometry" args={[3, 3, 3]} />
+          <meshStandardMaterial map={colormap} />
+        </mesh>
+        <Aniamtion thisBox={thisBox} />
+      </group>
     </>
   );
 };
 
-const BoxSample = () => {
+const GeometryPartCustomGeo = () => {
   return (
     <>
       <CanvasContainer>
-        <Title>Box sample</Title>
+        <Title>Geomeometry Part Three : Custom Geometry</Title>
         <Canvas camera={{ position: [-5, 2, 5] }}>
           <ambientLight />
           <directionalLight
             position={[10, 10, 10]}
             color="white"
-            intensity={3}
+            intensity={0.5}
           />
           <Suspense fallback={null}>
-            <SampleBox />
+            <CustomGeo />
           </Suspense>
           <OrbitControls />
         </Canvas>
@@ -63,4 +77,4 @@ const BoxSample = () => {
   );
 };
 
-export default BoxSample;
+export default GeometryPartCustomGeo;

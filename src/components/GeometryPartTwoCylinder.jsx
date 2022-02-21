@@ -1,4 +1,4 @@
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import styled from "styled-components";
@@ -32,9 +32,25 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const GeometryPartTwoCylinder = () => {
+const SampleCylinder = () => {
   const thisBox = useRef();
 
+  return (
+    <group ref={thisBox}>
+      <mesh>
+        <cylinderGeometry attach="geometry" args={[1, 1, 3, 16, 6, true]} />
+        <meshPhongMaterial attach="material" color="#0x515151" />
+      </mesh>
+      <mesh>
+        <cylinderGeometry attach="geometry" args={[1, 1, 3, 16, 6, true]} />
+        <meshNormalMaterial wireframe />
+      </mesh>
+      <Aniamtion thisBox={thisBox} />
+    </group>
+  );
+};
+
+const GeometryPartTwoCylinder = () => {
   return (
     <>
       <CanvasContainer>
@@ -47,33 +63,7 @@ const GeometryPartTwoCylinder = () => {
               color="#fffffff"
               intensity={3}
             />
-            <group ref={thisBox}>
-              <mesh>
-                <cylinderGeometry
-                  attach="geometry"
-                  args={[1, 1, 3, 16, 6, true]}
-                />
-                <meshPhongMaterial attach="material" color="#0x515151" />
-              </mesh>
-              <mesh>
-                <cylinderGeometry
-                  attach="geometry"
-                  args={[1, 1, 3, 16, 6, true]}
-                />
-                <meshNormalMaterial wireframe />
-              </mesh>
-            </group>
-            <Aniamtion thisBox={thisBox} />
-            <PerspectiveCamera
-              manual
-              aspect={1200 / 600}
-              far={1000}
-              near={0.1}
-              fov={75}
-              position={[0, 100, 10]}
-              lookAt={[0, 0, 0]}
-              onUpdate={(c) => c.updateProjectionMatrix()}
-            />
+            <SampleCylinder />
             <OrbitControls />
           </Suspense>
         </Canvas>

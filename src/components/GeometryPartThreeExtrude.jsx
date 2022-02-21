@@ -47,8 +47,9 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const GeometryPartThreeExtrude = () => {
+const ExtrudeSample = () => {
   const thisBox = useRef();
+
   const extrudeSettings = React.useMemo(
     () => ({
       steps: 2,
@@ -63,26 +64,32 @@ const GeometryPartThreeExtrude = () => {
   );
 
   return (
+    <group ref={thisBox}>
+      <mesh>
+        <Extrude args={[shape, extrudeSettings]} />
+        <meshNormalMaterial wireframe />
+      </mesh>
+      <Aniamtion thisBox={thisBox} />
+    </group>
+  );
+};
+
+const GeometryPartThreeExtrude = () => {
+  return (
     <>
       <CanvasContainer>
         <Title>Geomeometry Part Three : ExtrudeGeometry</Title>
-        <Canvas camera={{ postion: [0, 0, 10] }}>
+        <Canvas camera={{ position: [-5, 2, 20] }}>
+          <ambientLight />
+          <directionalLight
+            position={[10, 10, 10]}
+            color="#fefff7"
+            intensity={3}
+          />
           <Suspense fallback={null}>
-            <ambientLight />
-            <directionalLight
-              position={[10, 10, 10]}
-              color="#fffffff"
-              intensity={3}
-            />
-            <group ref={thisBox}>
-              <mesh>
-                <Extrude args={[shape, extrudeSettings]} />
-                <meshNormalMaterial wireframe />
-              </mesh>
-            </group>
-            <Aniamtion thisBox={thisBox} />
-            <OrbitControls />
+            <ExtrudeSample />
           </Suspense>
+          <OrbitControls />
         </Canvas>
       </CanvasContainer>
     </>

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import BoxSample from "../components/BoxSample";
+import GeometryPartCustomGeo from "../components/GeometryPartCustomGeo";
 import GeometryPartOne from "../components/GeometryPartOne";
 import GeometryPartThreeExtrude from "../components/GeometryPartThreeExtrude";
 import GeometryPartThreeLathe from "../components/GeometryPartThreeLathe";
@@ -51,6 +52,7 @@ const Geometry = () => {
       <GeometryPartThreeLathe />
       <GeometryPartThreeExtrude />
       <GeometryPartThreeText />
+      <GeometryPartCustomGeo />
     </Container>
   );
 };

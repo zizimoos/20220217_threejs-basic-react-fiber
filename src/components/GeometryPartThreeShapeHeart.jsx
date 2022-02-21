@@ -55,34 +55,39 @@ const Aniamtion = (props) => {
   return null;
 };
 
-const GeometryPartThreeShapeHeart = () => {
+const ShapeHeart = () => {
   const thisBox = useRef();
+  return (
+    <group ref={thisBox}>
+      <mesh>
+        <shapeBufferGeometry attach="geometry" args={[shape]} />
+        <meshPhongMaterial attach="material" color="#0x515151" />
+      </mesh>
+      <mesh>
+        <shapeBufferGeometry attach="geometry" args={[shape]} />
+        <meshNormalMaterial wireframe />
+      </mesh>
+      <Aniamtion thisBox={thisBox} />
+    </group>
+  );
+};
 
+const GeometryPartThreeShapeHeart = () => {
   return (
     <>
       <CanvasContainer>
-        <Title>Geomeometry Part Three : ShapeGeometry</Title>
-        <Canvas camera={{ postion: [0, 0, 10] }}>
+        <Title>Geomeometry Part Three : ShapeHeart Geometry</Title>
+        <Canvas camera={{ position: [-5, 2, 10] }}>
+          <ambientLight />
+          <directionalLight
+            position={[10, 10, 10]}
+            color="white"
+            intensity={3}
+          />
           <Suspense fallback={null}>
-            <ambientLight />
-            <directionalLight
-              position={[10, 10, 10]}
-              color="#fffffff"
-              intensity={3}
-            />
-            <group ref={thisBox}>
-              <mesh>
-                <shapeBufferGeometry attach="geometry" args={[shape]} />
-                <meshPhongMaterial attach="material" color="#0x515151" />
-              </mesh>
-              <mesh>
-                <shapeBufferGeometry attach="geometry" args={[shape]} />
-                <meshNormalMaterial wireframe />
-              </mesh>
-            </group>
-            <Aniamtion thisBox={thisBox} />
-            <OrbitControls />
+            <ShapeHeart />
           </Suspense>
+          <OrbitControls />
         </Canvas>
       </CanvasContainer>
     </>
