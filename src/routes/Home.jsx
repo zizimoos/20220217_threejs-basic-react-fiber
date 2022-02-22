@@ -5,6 +5,7 @@ const Home = () => {
       <p>This is the home page.</p>
       <div>Geometry</div>
       <div>Scene Graph</div>
+      <div>Materail</div>
     </div>
   );
 };
