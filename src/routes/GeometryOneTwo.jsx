@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import BoxSample from "../components/BoxSample";
-import GeometryPartCustomGeo from "../components/GeometryPartCustomGeo";
 import GeometryPartOne from "../components/GeometryPartOne";
-import GeometryPartThreeExtrude from "../components/GeometryPartThreeExtrude";
-import GeometryPartThreeLathe from "../components/GeometryPartThreeLathe";
-import GeometryPartThreeShape from "../components/GeometryPartThreeShape";
-import GeometryPartThreeShapeHeart from "../components/GeometryPartThreeShapeHeart";
-import GeometryPartThreeShapeSine from "../components/GeometryPartThreeShapeSine";
-import GeometryPartThreeText from "../components/GeometryPartThreeText";
-import GeometryPartThreeTube from "../components/GeometryPartThreeTube";
 import GeometryPartTwo from "../components/GeometryPartTwo";
 import GeometryPartTwoCorn from "../components/GeometryPartTwoCorn";
 import GeometryPartTwoCylinder from "../components/GeometryPartTwoCylinder";
@@ -31,7 +23,7 @@ const Title = styled.h1`
   padding: 10px;
 `;
 
-const Geometry = () => {
+const GeometryOneTwo = () => {
   return (
     <Container>
       <Title>ThreeJS reactJS</Title>
@@ -45,15 +37,7 @@ const Geometry = () => {
       <GeometryPartTwoPlane />
       <GeometryPartTwoTorus />
       <GeometryPartTwoTorusKnot />
-      <GeometryPartThreeShape />
-      <GeometryPartThreeShapeHeart />
-      <GeometryPartThreeShapeSine />
-      <GeometryPartThreeTube />
-      <GeometryPartThreeLathe />
-      <GeometryPartThreeExtrude />
-      <GeometryPartThreeText />
-      <GeometryPartCustomGeo />
     </Container>
   );
 };
-export default Geometry;
+export default GeometryOneTwo;

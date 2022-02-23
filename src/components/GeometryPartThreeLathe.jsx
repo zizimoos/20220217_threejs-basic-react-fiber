@@ -49,7 +49,7 @@ const GeometryPartThreeLathe = () => {
     <>
       <CanvasContainer>
         <Title>Geomeometry Part Three : Lathe Geometry</Title>
-        <Canvas camera={{ postion: [0, 0, 10] }}>
+        <Canvas camera={{ position: [-5, 2, 10] }}>
           <Suspense fallback={null}>
             <ambientLight />
             <directionalLight
