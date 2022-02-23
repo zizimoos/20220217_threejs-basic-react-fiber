@@ -16,7 +16,7 @@ const Title = styled.h1`
   padding: 10px;
 `;
 
-const Geometry = () => {
+const Material = () => {
   return (
     <Container>
       <Title>ThreeJS Material</Title>
@@ -26,4 +26,4 @@ const Geometry = () => {
     </Container>
   );
 };
-export default Geometry;
+export default Material;

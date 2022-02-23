@@ -5,6 +5,7 @@ import SceneGraph from "./routes/SceneGraph";
 import Material from "./routes/Material";
 import GeometryOneTwo from "./routes/GeometryOneTwo";
 import GeometryThree from "./routes/GeometryThree";
+import Light from "./routes/Light";
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
         <Route path="/geometrythree" element={<GeometryThree />} />
         <Route path="/scenegraph" element={<SceneGraph />} />
         <Route path="/material" element={<Material />} />
+        <Route path="/light" element={<Light />} />
       </Routes>
     </BrowserRouter>
   );

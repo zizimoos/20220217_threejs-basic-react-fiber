@@ -7,6 +7,7 @@ const Home = () => {
       <div>Geometry Two</div>
       <div>Scene Graph</div>
       <div>Materail</div>
+      <div>Light</div>
     </div>
   );
 };
