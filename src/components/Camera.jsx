@@ -46,7 +46,7 @@ const SsphereAniamtion = (props) => {
   return null;
 };
 
-const LigntSystem = () => {
+const Camera = () => {
   const thisBox = useRef();
   const EarthBox = useRef();
   const Ssphere = useRef();
@@ -55,7 +55,7 @@ const LigntSystem = () => {
     return (
       <>
         <group ref={thisBox} position={[0, 0, 0]}>
-          <mesh rotation={[THREE.Math.degToRad(-90), 0, 0]}>
+          <mesh rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry attach="geometry" args={[10, 10]} />
             <meshStandardMaterial
               attach="material"
@@ -84,11 +84,8 @@ const LigntSystem = () => {
     return (
       <>
         <group ref={EarthBox} position={[0, 0, 0]}>
-          <mesh rotation={[THREE.Math.degToRad(-90), 0, 0]}>
-            <sphereGeometry
-              attach="geometry"
-              args={[1.5, 32, 32, 0, Math.PI]}
-            />
+          <mesh>
+            <sphereGeometry attach="geometry" args={[1.5, 32, 32]} />
             <meshStandardMaterial
               attach="material"
               color="#ffffff"
@@ -149,31 +146,32 @@ const LigntSystem = () => {
     <>
       <CanvasContainer>
         <Title>Light</Title>
-        <Canvas camera={{ position: [-1, 5, 5] }}>
+        <Canvas
+          camera={{ fov: 75, near: 0.1, far: 1000, position: [-1, 5, 5] }}
+        >
           <Suspense fallback={null}>
-            <fog attach="fog" args={["white", 0, 40]} />
-            <ambientLight intensity={0.4} />
-            <directionalLight
-              castShadow
-              position={[2.5, 8, 5]}
-              intensity={1.5}
-              shadow-mapSize-width={1024}
-              shadow-mapSize-height={1024}
-              shadow-camera-far={50}
-              shadow-camera-left={-10}
-              shadow-camera-right={10}
-              shadow-camera-top={10}
-              shadow-camera-bottom={-10}
-            />
-            <pointLight position={[-10, 0, -20]} color="red" intensity={2.5} />
-            <pointLight position={[0, -10, 0]} intensity={1.5} />
+            {/* <ambientLight color={"red"} intensity={0.1} /> */}
+            {/* <hemisphereLight color={("blue", "peru")} intensity={0.5} /> */}
+            {/* <directionalLight
+              position={[10, 10, 10]}
+              color="#ffffff"
+              intensity={3}
+            /> */}
+            {/* <pointLight color="#ffffff" intensity={2} /> */}
+            {/* <spotLight
+              position={[0, 5, 0]}
+              angle={THREE.Math.degToRad(50)}
+              penumbra={0.3}
+              color="#ffffff"
+              intensity={2}
+            /> */}
             <rectAreaLight
-              color="azure"
+              color="#ffffff"
               intensity={10}
               position={[0, 5, 0]}
               rotation={[THREE.Math.degToRad(-90), 0, 0]}
-              width={10}
-              height={1}
+              width={6}
+              height={4}
             />
 
             <Ground />
@@ -186,4 +184,4 @@ const LigntSystem = () => {
   );
 };
 
-export default LigntSystem;
+export default Camera;
