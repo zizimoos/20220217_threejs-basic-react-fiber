@@ -143,8 +143,6 @@ const LigntSystem = () => {
     );
   };
 
-  // heckkk
-
   return (
     <>
       <CanvasContainer>
